@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react"
 import uniqueId from "lodash/uniqueId"
 import NewItem from "./NewItem"
 import Items from "./Items"
-import { Grid, Button } from "semantic-ui-react"
+import { Grid, Button, Segment } from "semantic-ui-react"
 
 const defaultState = [
   { value: "Pants", id: uniqueId(), packed: false },
@@ -36,7 +36,14 @@ class Application extends Component {
           <Items title="Packed Items" items={[]} />
         </Grid.Column>
         <Grid.Column mobile={16} tablet={10}>
-          <Button content="Mark All As Unpacked" color="orange" size="big" />
+          <Segment style={{ padding: 0 }} raised>
+            <Button
+              content="Mark All As Unpacked"
+              color="orange"
+              size="big"
+              fluid
+            />
+          </Segment>
         </Grid.Column>
       </Grid>
     )

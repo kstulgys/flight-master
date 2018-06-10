@@ -15,7 +15,7 @@ const Items = ({ title }) => (
     <Divider horizontal content={title} />
     <Segment.Group raised>
       <Segment attached="top" inverted color="orange">
-        <Input fluid type="text" placeholder="Search item" />
+        <Input fluid icon="search" placeholder="Search..." />
       </Segment>
 
       <Segment attached>
