@@ -22,22 +22,59 @@ class Application extends Component {
   state = {
     items: defaultState
   }
-  render() {
-    const packed = this.state.items.filter(i => i.packed == true)
-    const unpacked = this.state.items.filter(i => i.packed == false)
 
-    console.log(packed)
+  addItem = item => {
+    this.setState({ items: [...this.state.items, item] })
+  }
+  removeItem = itemToRemove => {
+    this.setState({
+      items: [...this.state.items.filter(item => item.id !== itemToRemove.id)]
+    })
+  }
+
+  toggleItem = itemToToggle => {
+    const items = this.state.items.map(item => {
+      if (item.id == itemToToggle.id) {
+        return { ...itemToToggle, packed: !itemToToggle.packed }
+      }
+      return item
+    })
+    this.setState({ items })
+  }
+
+  markAllAsUnpacked = () => {
+    const items = this.state.items.map(item => {
+      return { ...item, packed: false }
+    })
+
+    this.setState({ items })
+  }
+
+  render() {
+    const unpackedItems = this.state.items.filter(i => !i.packed)
+    const packedItems = this.state.items.filter(i => i.packed)
+
     return (
       <Grid centered stretched padded>
         <Grid.Column mobile={16} tablet={10}>
-          <NewItem />
+          <NewItem onSubmit={this.addItem} />
         </Grid.Column>
 
         <Grid.Column mobile={16} tablet={10}>
-          <Items title="Unpacked Items" items={unpacked} />
+          <Items
+            onRemove={this.removeItem}
+            onToggle={this.toggleItem}
+            title="Unpacked Items"
+            items={unpackedItems}
+          />
         </Grid.Column>
         <Grid.Column mobile={16} tablet={10}>
-          <Items title="Packed Items" items={packed} />
+          <Items
+            onRemove={this.removeItem}
+            title="Packed Items"
+            items={packedItems}
+            onToggle={this.toggleItem}
+          />
         </Grid.Column>
         <Grid.Column mobile={16} tablet={10}>
           <Segment style={{ padding: 0 }} raised>
@@ -46,6 +83,7 @@ class Application extends Component {
               color="orange"
               size="big"
               fluid
+              onClick={this.markAllAsUnpacked}
             />
           </Segment>
         </Grid.Column>

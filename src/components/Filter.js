@@ -1,6 +1,20 @@
-import React from "react"
+import React, { Component } from "react"
 import { Input } from "semantic-ui-react"
 
-const Filter = () => <Input fluid icon="search" placeholder="Search..." />
+class Filter extends Component {
+  handleChange = (e, { value }) => {
+    this.props.onChange(value)
+  }
+  render() {
+    return (
+      <Input
+        onChange={this.handleChange}
+        fluid
+        icon="search"
+        placeholder="Search..."
+      />
+    )
+  }
+}
 
 export default Filter
