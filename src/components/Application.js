@@ -23,6 +23,10 @@ class Application extends Component {
     items: defaultState
   }
   render() {
+    const packed = this.state.items.filter(i => i.packed == true)
+    const unpacked = this.state.items.filter(i => i.packed == false)
+
+    console.log(packed)
     return (
       <Grid centered stretched padded>
         <Grid.Column mobile={16} tablet={10}>
@@ -30,10 +34,10 @@ class Application extends Component {
         </Grid.Column>
 
         <Grid.Column mobile={16} tablet={10}>
-          <Items title="Unpacked Items" items={[]} />
+          <Items title="Unpacked Items" items={unpacked} />
         </Grid.Column>
         <Grid.Column mobile={16} tablet={10}>
-          <Items title="Packed Items" items={[]} />
+          <Items title="Packed Items" items={packed} />
         </Grid.Column>
         <Grid.Column mobile={16} tablet={10}>
           <Segment style={{ padding: 0 }} raised>

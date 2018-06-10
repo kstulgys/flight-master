@@ -1,34 +1,19 @@
 import React, { Fragment } from "react"
-import {
-  Grid,
-  Form,
-  List,
-  Input,
-  Checkbox,
-  Divider,
-  Segment,
-  Header
-} from "semantic-ui-react"
+import Filter from "./Filter"
+import Item from "./Item"
+import { List, Divider, Segment } from "semantic-ui-react"
 
-const Items = ({ title }) => (
+const Items = ({ title, items }) => (
   <Fragment>
-    <Divider horizontal content={title} />
+    <Divider horizontal content={`${title}: ${items.length}`} />
     <Segment.Group raised>
       <Segment attached="top" inverted color="orange">
-        <Input fluid icon="search" placeholder="Search..." />
+        <Filter />
       </Segment>
 
       <Segment attached>
         <List divided relaxed="very" verticalAlign="middle">
-          <List.Item>
-            <Checkbox label="Make my profile visible" />
-          </List.Item>
-          <List.Item>
-            <Checkbox label="Make my profile visible" />
-          </List.Item>
-          <List.Item>
-            <Checkbox label="Make my profile visible" />
-          </List.Item>
+          {items.map(item => <Item item={item} key={item.id} />)}
         </List>
       </Segment>
     </Segment.Group>
