@@ -3,12 +3,13 @@ import { Input } from "semantic-ui-react"
 
 class Filter extends Component {
   handleChange = (e, { value }) => {
-    this.props.onChange(value)
+    this.props.updateFilter(value)
   }
   render() {
     return (
       <Input
         onChange={this.handleChange}
+        value={this.props.value}
         fluid
         icon="search"
         placeholder="Search..."

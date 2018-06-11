@@ -1,24 +1,15 @@
 import React, { Component } from "react"
 import { Form, Segment } from "semantic-ui-react"
-import uniqueId from "lodash/uniqueId"
 
 class NewItem extends Component {
-  state = {
-    value: ""
-  }
-
   handleChange = (e, { value }) => {
-    this.setState({ value })
+    this.props.updateNewItemValue(value)
   }
 
   handleSubmit = e => {
     e.preventDefault()
-    this.props.onSubmit({
-      value: this.state.value,
-      id: uniqueId(),
-      packed: false
-    })
-    this.setState({ value: "" })
+    this.props.addNewItem(this.props.value)
+    this.props.resetItemValue()
   }
 
   render() {

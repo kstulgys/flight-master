@@ -5,7 +5,7 @@ const Item = ({ item, onRemove, onToggle }) => (
   <List.Item>
     <List.Content verticalAlign="middle">
       <Checkbox
-        onChange={() => onToggle(item)}
+        onChange={() => onToggle(item.id)}
         label={item.value}
         defaultChecked={item.packed}
       />
@@ -15,13 +15,10 @@ const Item = ({ item, onRemove, onToggle }) => (
         link
         name="delete"
         content="remove"
-        onClick={() => onRemove(item)}
+        onClick={() => onRemove(item.id)}
       />
     </List.Content>
   </List.Item>
 )
 
 export default Item
-
-//style={{ display: "flex" }}
-//    style={{ paddingLeft: 10 }}
